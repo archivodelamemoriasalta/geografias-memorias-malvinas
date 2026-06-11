@@ -448,12 +448,14 @@ L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png'
 }).addTo(map);
 
 function color(n){
-  if(!n) return '#0d1f3c';
-  if(n>80) return '#c9a84c';
-  if(n>40) return '#2980c4';
-  if(n>20) return '#2563a8';
-  if(n>5)  return '#1e5799';
-  return '#1a3a6e';
+  if(!n) return '#E6CDD3';
+
+  if(n>80) return '#3F0310';
+  if(n>40) return '#5A0716';
+  if(n>20) return '#6D071A';
+  if(n>5)  return '#8E2338';
+
+  return '#B55468';
 }
 
 fetch('data/salta_departamentos.geojson')
