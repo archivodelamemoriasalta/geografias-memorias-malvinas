@@ -36,10 +36,11 @@
   /* HEADER */
   --fondo-h:#FFFFFF;
 }
+
     *{margin:0;padding:0;box-sizing:border-box;}
     body{background:#111111;color:var(--crema);font-family:'Crimson Pro',Georgia,serif;min-height:100vh;overflow-x:hidden;}
 
-    /* HEADER - Elegancia clásica y limpia */
+    /* HEADER */
     header{background:var(--fondo-h);border-bottom:4px solid var(--guindo);box-shadow: 0 4px 20px rgba(0,0,0,0.3);}
     .hlogos{display:flex;align-items:center;justify-content:space-between;padding:16px 32px;border-bottom:1px solid rgba(107,18,32,.1);flex-wrap:wrap;gap:15px;}
     .hlogos img.ll{height:68px;width:auto;max-width:45%;object-fit:contain;filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));}
@@ -59,82 +60,120 @@
     .ley{background:#161616;border-bottom:1px solid rgba(201,168,76,.15);padding:10px 32px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
     .ltit{font-family:'Oswald',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--oro);font-weight: 500;}
     .litems{display:flex;gap:16px;flex-wrap:wrap;align-items:center;}
-    .li{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--crema-d);font-family: 'Crimson Pro', serif;}
+    .li{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--crema-d);}
     .lc{width:18px;height:11px;border-radius:2px;border:1px solid rgba(255,255,255,.2);flex-shrink:0;box-shadow: 0 1px 3px rgba(0,0,0,0.4);}
     .lsep{width:1px;height:16px;background:rgba(255,255,255,.1);margin:0 4px;}
 
-    /* LAYOUT BASE */
-    .main{display:flex;height:calc(100vh - 188px);min-height:540px;}
+    /* LAYOUT BASE ESCRITORIO */
+    .main{display:flex;height:calc(100vh - 188px);min-height:540px;overflow:hidden;}
     #map{flex:1;background:var(--azul-n);position:relative;}
     .leaflet-container{background:#0b1118 !important;}
     
-    /* MENÚS Y COMPONENTES DEL MAPA - Estilo Premium */
+    /* DETALLES DEL MAPA */
     .map-tooltip{background:rgba(22,22,22,.96)!important;border:1px solid var(--oro)!important;color:var(--crema)!important;font-family:'Crimson Pro',serif!important;font-size:14px!important;padding:10px 16px!important;border-radius:4px!important;box-shadow:0 8px 24px rgba(0,0,0,.7)!important;}
     .map-tooltip strong{display:block;font-family:'EB Garamond',serif;font-size:16px;color:var(--oro-cl);margin-bottom:3px;}
     
-    .map-quote{position:absolute;bottom:28px;left:16px;z-index:500;max-width:290px;background:linear-gradient(145deg, rgba(26,26,26,0.95), rgba(15,15,15,0.98));border-left:3px solid var(--oro);padding:14px 18px;border-radius:0 6px 6px 0;box-shadow: 0 6px 20px rgba(0,0,0,0.6);border: 1px solid rgba(201,168,76,0.1);border-left:3px solid var(--oro);}
+    .map-quote{position:absolute;bottom:28px;left:16px;z-index:500;max-width:290px;background:linear-gradient(145deg, rgba(26,26,26,0.95), rgba(15,15,15,0.98));border-left:3px solid var(--oro);padding:14px 18px;border-radius:0 6px 6px 0;box-shadow: 0 6px 20px rgba(0,0,0,0.6);border: 1px solid rgba(201,168,76,0.1);}
     .map-quote p{font-family:'EB Garamond',serif;font-size:14px;font-style:italic;color:var(--crema-d);line-height:1.6;}
     .map-quote cite{display:block;font-family:'Oswald',sans-serif;font-size:9.5px;letter-spacing:1.5px;color:var(--oro-cl);margin-top:8px;text-transform: uppercase;opacity:.9;}
 
-    /* PANEL LATERAL - Elegancia Oscura e Institucional */
-    .panel{width:410px;flex-shrink:0;background:linear-gradient(180deg, #1E1E1E 0%, #141414 50%, #0A0A0A 100%);border-left:1px solid rgba(201,168,76,.25);display:flex;flex-direction:column;overflow:hidden;position:relative;box-shadow: -5px 0 25px rgba(0,0,0,0.5);}
+    /* =========================================
+       PANEL LATERAL ORIGINAL RESTAURADO Y OPTIMIZADO
+       ========================================= */
+    .panel{
+      width:410px;
+      flex-shrink:0;
+      background:linear-gradient(180deg, #1E1E1E 0%, #141414 50%, #0A0A0A 100%);
+      border-left:1px solid rgba(201,168,76,.25);
+      display:flex;
+      flex-direction:column;
+      overflow-y:auto; /* Permite el scroll de la lista original y reseñas */
+      position:relative;
+      box-shadow: -5px 0 25px rgba(0,0,0,0.5);
+    }
     .panel::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--guindo),var(--oro),var(--guindo),transparent);z-index: 10;}
     
-    /* MENÚS INTERNOS / LISTAS / BOTONES (Asegura su estética original) */
+    /* Estilos de las tarjetas de los Veteranos / Reseñas (Originales) */
     .pinicio{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px;text-align:center;}
     
-    /* REGLAS RESPONSIVAS ELEGANTES PARA MÓVILES */
+    /* Aseguramos que los contenedores dinámicos mantengan su comportamiento fluido */
+    .v-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(201,168,76,0.15);
+      border-radius: 4px;
+      padding: 16px;
+      margin: 12px 20px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .v-card:hover {
+      background: rgba(201,168,76,0.07);
+      border-color: var(--oro);
+      transform: translateY(-2px);
+    }
+    
+    /* Estilo de la Reseña Histórica Individual */
+    .resena-contenedor {
+      padding: 24px;
+      color: var(--crema-d);
+    }
+    .resena-back-btn {
+      color: var(--oro-cl);
+      font-family: 'Oswald', sans-serif;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 20px;
+    }
+    .resena-back-btn:hover { color: var(--crema); }
+
+    /* =========================================
+       RESPONSIVE DESIGN (Elegancia preservada)
+       ========================================= */
     @media (max-width: 992px) {
-      header { border-bottom: 3px solid var(--guindo); }
-      .hlogos { justify-content: center; padding: 12px; gap: 12px; }
-      .hlogos img.ll { height: 52px; }
-      .hlogos img.lr { height: 58px; }
-      .hc { order: 3; width: 100%; margin-top: 6px; padding: 0; }
-      .hc .tit { font-size: 19px; }
-      .hc .sub { font-size: 13px; }
-      .hst { gap: 20px; padding: 12px; }
-      .std { display: none; }
-      .stn { font-size: 24px; }
-      
       .main {
-        display: flex;
         flex-direction: column;
         height: auto;
-        min-height: auto;
+        overflow: visible;
       }
       #map {
         width: 100%;
-        height: 55vh; /* Proporción ideal para interactuar con el mapa táctil */
-        min-height: 320px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+        height: 50vh;
+        min-height: 350px;
       }
       .panel {
         width: 100%;
         border-left: none;
         border-top: 2px solid rgba(201,168,76,.25);
         height: auto;
-        max-height: 550px;
-        overflow-y: auto;
-        background: linear-gradient(180deg, #1A1A1A 0%, #0F0F0F 100%);
+        max-height: 500px; /* Evita que se extienda infinitamente en móviles */
+        overflow-y: auto; /* Scroll interno para buscar veteranos cómodamente */
+        background: #141414;
       }
       .map-quote {
         bottom: 12px;
         left: 12px;
         max-width: calc(100% - 24px);
-        font-size: 12px;
-        padding: 10px 14px;
-        background: rgba(15, 15, 15, 0.96); /* Fondo opaco ultra-limpio para evitar mezcla visual con el mapa trasero */
+        background: rgba(15, 15, 15, 0.96);
       }
+      .hlogos { justify-content: center; padding: 12px; gap: 12px; }
+      .hlogos img.ll { height: 52px; }
+      .hlogos img.lr { height: 58px; }
+      .hc { order: 3; width: 100%; margin-top: 6px; padding: 0; }
+      .hc .tit { font-size: 19px; }
+      .hst { gap: 20px; padding: 12px; }
+      .std { display: none; }
+      .stn { font-size: 24px; }
     }
 
-    /* Optimización de menús y textos para celulares muy compactos */
     @media (max-width: 400px) {
       .stn { font-size: 21px; }
-      .stl { font-size: 8.5px; letter-spacing: 1px; }
-      .hlogos img.ll { height: 44px; }
-      .hlogos img.lr { height: 48px; }
+      .stl { font-size: 8.5px; }
       .hc .tit { font-size: 17px; }
-      .ley { padding: 8px 16px; gap: 10px; }
     }
 </style>
 </head>
