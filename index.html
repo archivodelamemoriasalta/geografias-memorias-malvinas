@@ -37,44 +37,29 @@
   /* HEADER */
   --fondo-h:#FFFFFF;
 }
-    *{margin:0;padding:0;box-sizing:border-box;}
-    body{background:#111111;color:var(--crema);font-family:'Crimson Pro',Georgia,serif;min-height:100vh;overflow-x:hidden;}
+*{margin:0;padding:0;box-sizing:border-box;}
+  body{background:#111111;color:var(--crema);font-family:'Crimson Pro',Georgia,serif;min-height:100vh;overflow-x:hidden;}
 
-    /* === HEADER AJUSTADO === */
-.hlogos {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 14px 32px;           /* Ajuste de altura general */
-  border-bottom: 1px solid rgba(107,18,32,.15);
-  min-height: 92px;             /* Altura mínima recomendada por tu referencia */
-}
+  /* HEADER */
+  header{background:var(--fondo-h);border-bottom:4px solid var(--guindo);}
+  
+  .hlogos{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:12px 16px;
+    border-bottom:1px solid rgba(107,18,32,.15);
+    gap:12px;
+  }
+  .hlogos img.logo-header{height:56px;width:auto;flex-shrink:0;}
+  .hlogos img.lr{height:68px;width:auto;flex-shrink:0;}
 
-.hlogos img.logo-header {
-  height: 68px;                 /* Logo Subsecretaría y CPVG */
-  width: auto;
-  flex-shrink: 0;
-}
+  .hc{flex:1;text-align:center;min-width:0;padding:0 8px;}
+  .hc .sup{font-size:9px;letter-spacing:2px;}
+  .hc .tit{font-size:17px;line-height:1.1;}
+  .hc .sub{font-size:12.5px;}
 
-.hlogos img.lr {
-  height: 78px;                 /* Logo grande de la derecha */
-  width: auto;
-}
-
-.hc {
-  flex: 1;
-  text-align: center;
-  padding: 0 24px;
-}
-
-.hc .tit {
-  font-size: 21px;
-  line-height: 1.1;
-}
-
-.hc .sub {
-  font-size: 14.5px;
-}
+  .hst{padding:9px 16px;gap:12px;flex-wrap:wrap;justify-content:center;font-size:14px;}
 
     .hst{background:linear-gradient(135deg,var(--guindo-osc),var(--guindo),#7a1520);padding:9px 32px;min-height: 58px;display:flex;align-items:center;justify-content:center;gap:36px;}
     .sti{display:flex;align-items:center;gap:10px;}
@@ -297,127 +282,56 @@
 
     @keyframes fi{from{opacity:0;transform:translateX(8px)}to{opacity:1;transform:translateX(0)}}
 @media(max-width:768px){
+    .hlogos{
+      padding:10px 12px;
+      min-height:78px;
+    }
+    .hlogos img.logo-header{height:48px;}
+    .hlogos img.lr{height:58px;}
 
-  body{
-    overflow:hidden;
+    .hc .tit{font-size:15px;}
+    .hc .sub{font-size:11.5px;}
+    .hc{padding:0 6px;}
+
+    .hst{padding:8px 12px;gap:10px;}
+
+    .main{
+      position:relative;
+      height:calc(100dvh - 168px); /* ajustado por header más pequeño */
+      min-height:0;
+    }
+
+    .panel{
+      position:absolute;
+      top:0; right:0;
+      width:min(92vw, 400px);
+      height:100%;
+      z-index:2000;
+      transform:translateX(100%);
+      transition:transform .3s cubic-bezier(0.32,0.72,0,1);
+      box-shadow:-8px 0 35px rgba(0,0,0,.6);
+    }
+    .panel.open{transform:translateX(0);}
+
+    .menu-mobile{
+      position:absolute;
+      top:14px; right:14px;
+      z-index:2500;
+      width:50px; height:50px;
+      background:rgba(17,17,17,.95);
+      border:1px solid rgba(201,168,76,.3);
+      color:white;
+      font-size:26px;
+      border-radius:6px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .ley{padding:8px 12px;gap:10px;font-size:11px;}
+    .map-quote{max-width:170px;bottom:12px;left:12px;font-size:12px;}
   }
-
-  .main{
-    position:relative;
-    height:calc(100dvh - 172px);
-    min-height:0;
-  }
-
-  #map{
-    width:100%;
-    height:100%;
-  }
-
-  .panel{
-    position:absolute;
-    top:0;
-    right:0;
-    width:min(92vw,420px);
-    height:100%;
-    z-index:2000;
-
-    transform:translateX(100%);
-    transition:transform .25s ease;
-
-    border-left:1px solid rgba(201,168,76,.2);
-    box-shadow:-6px 0 30px rgba(0,0,0,.45);
-  }
-
-  .panel.open{
-    transform:translateX(0);
-  }
-
-  .menu-mobile{
-    position:absolute;
-    top:12px;
-    right:12px;
-    z-index:2500;
-
-    width:48px;
-    height:48px;
-
-    border:none;
-    border-radius:4px;
-
-    background:rgba(17,17,17,.92);
-    color:#F8F8F8;
-
-    font-size:24px;
-    cursor:pointer;
-  }
-
-  .hlogos{
-    padding:10px 12px;
-  }
-
-  .hlogos img.ll{
-    height:42px;
-  }
-
-  .hlogos img.lr{
-    height:48px;
-  }
-
-  .hc{
-    padding:0 10px;
-  }
-
-  .hc .tit{
-    font-size:15px;
-    line-height:1.15;
-  }
-
-  .hc .sub{
-    font-size:12px;
-  }
-
-  .hst{
-    gap:12px;
-    padding:8px 12px;
-    flex-wrap:wrap;
-  }
-
-  .modal{
-    width:100vw;
-    height:100dvh;
-    border-radius:0;
-  }
-
-  .map-quote{
-    max-width:180px;
-  }
-.logo-header{
-  height:4px;
-}
-
-.logo-izq{
-  left:10px;
-}
-
-.logo-der{
-  right:10px;
-}
-
-.hc{
-  padding:0 55px;
-}
-
-.hc .tit{
-  font-size:14px;
-  line-height:1.15;
-}
-
-.hc .sub{
-  font-size:11px;
-
-}
-}
-  </style>
+</style>
 </head>
   <script>
 
