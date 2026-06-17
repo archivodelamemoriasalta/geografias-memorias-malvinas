@@ -40,7 +40,6 @@
     *{margin:0;padding:0;box-sizing:border-box;}
     body{background:#111111;color:var(--crema);font-family:'Crimson Pro',Georgia,serif;min-height:100vh;overflow-x:hidden;}
 
-    /* HEADER */
 /* HEADER */
 header {
   background: var(--fondo-h);
@@ -51,45 +50,36 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 32px;
-  min-height: 110px;           /* Misma altura que la franja roja */
-  gap: 20px;
+  padding: 10px 24px;
+  min-height: 88px;
+  gap: 12px;
 }
 
-.logo-izq, .logo-der {
-  flex-shrink: 0;
-}
-
-.ll { height: 68px; width: auto; }
-.lr { height: 76px; width: auto; }
+.ll { height: 44px; width: auto; }
+.lr { height: 50px; width: auto; }
 
 .hc {
   flex: 1;
   text-align: center;
-  padding: 0 20px;
+  padding: 0 8px;
 }
 
 .hc .sup {
-  font-family: 'Oswald', sans-serif;
-  font-size: 11px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 2.5px;
   color: var(--guindo);
-  margin-bottom: 6px;
-  opacity: .9;
+  margin-bottom: 3px;
 }
 
 .hc .tit {
-  font-family: 'EB Garamond', serif;
-  font-size: 21px;
+  font-size: 17.5px;
+  line-height: 1.05;
   font-weight: 700;
   color: var(--guindo-osc);
-  line-height: 1.1;
 }
 
 .hc .sub {
-  font-family: 'EB Garamond', serif;
-  font-size: 14.5px;
+  font-size: 13px;
   font-style: italic;
   color: var(--guindo);
 }
@@ -97,43 +87,45 @@ header {
 /* Franja roja */
 .hst {
   background: linear-gradient(135deg, var(--guindo-osc), var(--guindo), #7a1520);
-  padding: 12px 32px;
+  padding: 9px 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 28px;
+  gap: 18px;
   flex-wrap: wrap;
 }
 
-.sti { display: flex; align-items: center; gap: 10px; }
-.stn { font-family: 'EB Garamond', serif; font-size: 26px; font-weight: 700; color: var(--oro-cl); line-height: 1; }
-.stl { font-family: 'Oswald', sans-serif; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: rgba(245,240,232,.8); line-height: 1.3; }
-.std { width: 1px; height: 36px; background: rgba(255,255,255,.25); }
+.stn { font-size: 23px; }
+.stl { font-size: 8.5px; line-height: 1.2; }
 
-/* RESPONSIVE */
-@media (max-width: 1024px) {
-  .hlogos { padding: 12px 20px; min-height: 100px; }
-  .hc .tit { font-size: 19px; }
-}
-
+/* RESPONSIVE - Mobile prioritario */
 @media (max-width: 768px) {
   .hlogos {
-    padding: 10px 12px;
+    padding: 8px 12px;
+    min-height: 72px;
     flex-direction: column;
-    gap: 8px;
-    min-height: auto;
+    gap: 6px;
   }
-  .hc { order: -1; padding: 4px 0; }
-  .ll { height: 48px; }
-  .lr { height: 52px; }
-  .hc .tit { font-size: 16.5px; }
-  .hc .sub { font-size: 12.5px; }
+  
+  .hc { order: -1; padding: 0; }
+  .ll { height: 38px; }
+  .lr { height: 42px; }
+  
+  .hc .tit { font-size: 15px; }
+  .hc .sub { font-size: 12px; }
   
   .hst {
-    padding: 9px 12px;
-    gap: 14px;
+    padding: 7px 12px;
+    gap: 12px;
   }
-  .stn { font-size: 22px; }
+  .stn { font-size: 20px; }
+  .stl { font-size: 8px; }
+}
+
+/* Muy pequeño */
+@media (max-width: 480px) {
+  .hlogos { padding: 6px 10px; }
+  .hc .tit { font-size: 14px; }
 }
 
     /* LEYENDA */
@@ -503,40 +495,38 @@ window.addEventListener('resize',()=>{
 <body>
 
 <header>
-  <!-- Parte blanca - misma altura que la franja roja -->
   <div class="hlogos">
     <!-- Logo Izquierdo -->
     <div class="logo-izq">
-      <img src="data/Subsecretaria-logo.png" alt="Subsecretaría de Justicia" class="ll">
+      <img src="data/Subsecretaria-logo.png" alt="Subsecretaría" class="ll">
     </div>
 
-    <!-- Título central -->
+    <!-- Título Central -->
     <div class="hc">
-      <div class="sup">Archivo Provincial de la Memoria · Provincia de Salta</div>
+      <div class="sup">Archivo Provincial de la Memoria · Salta</div>
       <div class="tit">Geografías, Memorias y Semblanzas de Malvinas</div>
       <div class="sub">Un Límite al Olvido</div>
     </div>
 
     <!-- Logo Derecho -->
     <div class="logo-der">
-      <img src="data/logo-cpvg.png" alt="Centro Provincial de Veteranos de Guerra" class="lr">
+      <img src="data/logo-cpvg.png" alt="Veteranos de Guerra" class="lr">
     </div>
   </div>
 
-  <!-- Franja roja con estadísticas -->
+  <!-- Franja roja -->
   <div class="hst">
     <div class="sti"><div><div class="stn">710</div><div class="stl">Veteranos<br>registrados</div></div></div>
     <div class="std"></div>
-    <div class="sti"><div><div class="stn">141</div><div class="stl">Veteranos<br>fallecidos</div></div></div>
+    <div class="sti"><div><div class="stn">141</div><div class="stl">Fallecidos</div></div></div>
     <div class="std"></div>
     <div class="sti"><div><div class="stn">362</div><div class="stl">En el mapa</div></div></div>
     <div class="std"></div>
-    <div class="sti"><div><div class="stn">348</div><div class="stl">Fuera de Salta</div></div></div>
+    <div class="sti"><div><div class="stn">348</div><div class="stl">Fuera</div></div></div>
     <div class="std"></div>
-    <div class="sti"><div><div class="stn">1982</div><div class="stl">Guerra de<br>Malvinas</div></div></div>
+    <div class="sti"><div><div class="stn">1982</div><div class="stl">Malvinas</div></div></div>
   </div>
 </header>
-
 <div class="ley">
   <span class="ltit">Veteranos en mapa (residencia en Salta)</span>
   <div class="litems">
