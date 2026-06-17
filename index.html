@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <style>
 :root{
-  /* BORGOÑA INSTITUCIONAL */
+  /* BORGOÑA INSTITUCIONAL */
   --guindo:#6D071A;
   --guindo-osc:#3F0310;
   --guindo-cl:#8E2338;
@@ -39,100 +39,102 @@
     *{margin:0;padding:0;box-sizing:border-box;}
     body{background:#111111;color:var(--crema);font-family:'Crimson Pro',Georgia,serif;min-height:100vh;overflow-x:hidden;}
 
-    /* HEADER */
-    header{background:var(--fondo-h);border-bottom:4px solid var(--guindo);}
-    .hlogos{display:flex;align-items:center;justify-content:space-between;padding:12px 32px;border-bottom:1px solid rgba(107,18,32,.15);flex-wrap:wrap;gap:10px;}
-    .hlogos img.ll{height:64px;width:auto;max-width:45%;object-fit:contain;}
-    .hlogos img.lr{height:72px;width:auto;max-width:45%;object-fit:contain;}
+    /* HEADER - Elegancia clásica y limpia */
+    header{background:var(--fondo-h);border-bottom:4px solid var(--guindo);box-shadow: 0 4px 20px rgba(0,0,0,0.3);}
+    .hlogos{display:flex;align-items:center;justify-content:space-between;padding:16px 32px;border-bottom:1px solid rgba(107,18,32,.1);flex-wrap:wrap;gap:15px;}
+    .hlogos img.ll{height:68px;width:auto;max-width:45%;object-fit:contain;filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));}
+    .hlogos img.lr{height:76px;width:auto;max-width:45%;object-fit:contain;filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));}
     .hc{flex:1;text-align:center;padding:0 20px;min-width:280px;}
-    .hc .sup{font-family:'Oswald',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--guindo);margin-bottom:5px;opacity:.8;}
-    .hc .tit{font-family:'EB Garamond',serif;font-size:20px;font-weight:700;color:var(--guindo-osc);line-height:1.2;}
-    .hc .sub{font-family:'EB Garamond',serif;font-size:14px;font-style:italic;color:var(--guindo);margin-top:4px;opacity:.85;}
+    .hc .sup{font-family:'Oswald',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--guindo);margin-bottom:6px;opacity:.85;font-weight: 500;}
+    .hc .tit{font-family:'EB Garamond',serif;font-size:22px;font-weight:700;color:var(--guindo-osc);line-height:1.25;letter-spacing: 0.5px;}
+    .hc .sub{font-family:'EB Garamond',serif;font-size:15px;font-style:italic;color:var(--guindo);margin-top:5px;opacity:.9;}
     
-    .hst{background:linear-gradient(135deg,var(--guindo-osc),var(--guindo),#7a1520);padding:9px 32px;display:flex;align-items:center;justify-content:center;gap:36px;flex-wrap:wrap;}
-    .sti{display:flex;align-items:center;gap:10px;}
-    .stn{font-family:'EB Garamond',serif;font-size:26px;font-weight:700;color:var(--oro-cl);line-height:1;}
-    .stl{font-family:'Oswald',sans-serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.7);line-height:1.3;}
-    .std{width:1px;height:30px;background:rgba(255,255,255,.2);}
+    .hst{background:linear-gradient(135deg, var(--guindo-osc), var(--guindo), #520311);padding:12px 32px;display:flex;align-items:center;justify-content:center;gap:40px;flex-wrap:wrap;box-shadow: inset 0 2px 6px rgba(0,0,0,0.4);}
+    .sti{display:flex;align-items:center;gap:12px;}
+    .stn{font-family:'EB Garamond',serif;font-size:28px;font-weight:700;color:var(--oro-cl);line-height:1;text-shadow: 0 2px 4px rgba(0,0,0,0.5);}
+    .stl{font-family:'Oswald',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.8);line-height:1.4;}
+    .std{width:1px;height:32px;background:rgba(211,176,106,0.25);}
 
     /* LEYENDA */
-    .ley{background:#1A1A1A;border-bottom:1px solid rgba(201,168,76,.2);padding:7px 32px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;}
-    .ltit{font-family:'Oswald',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gris);}
-    .litems{display:flex;gap:13px;flex-wrap:wrap;align-items:center;}
-    .li{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--crema-d);}
-    .lc{width:16px;height:10px;border-radius:2px;border:1px solid rgba(255,255,255,.12);flex-shrink:0;}
+    .ley{background:#161616;border-bottom:1px solid rgba(201,168,76,.15);padding:10px 32px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
+    .ltit{font-family:'Oswald',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--oro);font-weight: 500;}
+    .litems{display:flex;gap:16px;flex-wrap:wrap;align-items:center;}
+    .li{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--crema-d);font-family: 'Crimson Pro', serif;}
+    .lc{width:18px;height:11px;border-radius:2px;border:1px solid rgba(255,255,255,.2);flex-shrink:0;box-shadow: 0 1px 3px rgba(0,0,0,0.4);}
     .lsep{width:1px;height:16px;background:rgba(255,255,255,.1);margin:0 4px;}
 
-    /* LAYOUT BASE (ESCRITORIO) */
-    .main{display:flex;height:calc(100vh - 172px);min-height:540px;}
-    #map{flex:1;background:var(--azul-n);position:relative;min-height:350px;}
-    .leaflet-container{background:#08121f !important;}
+    /* LAYOUT BASE */
+    .main{display:flex;height:calc(100vh - 188px);min-height:540px;}
+    #map{flex:1;background:var(--azul-n);position:relative;}
+    .leaflet-container{background:#0b1118 !important;}
     
-    .map-tooltip{background:rgba(17,17,17,.95)!important;border:1px solid var(--guindo)!important;color:var(--crema)!important;font-family:'Crimson Pro',serif!important;font-size:13px!important;padding:8px 14px!important;border-radius:3px!important;box-shadow:0 4px 20px rgba(0,0,0,.6)!important;}
-    .map-tooltip strong{display:block;font-family:'EB Garamond',serif;font-size:15px;color:var(--oro-cl);}
+    /* MENÚS Y COMPONENTES DEL MAPA - Estilo Premium */
+    .map-tooltip{background:rgba(22,22,22,.96)!important;border:1px solid var(--oro)!important;color:var(--crema)!important;font-family:'Crimson Pro',serif!important;font-size:14px!important;padding:10px 16px!important;border-radius:4px!important;box-shadow:0 8px 24px rgba(0,0,0,.7)!important;}
+    .map-tooltip strong{display:block;font-family:'EB Garamond',serif;font-size:16px;color:var(--oro-cl);margin-bottom:3px;}
     
-    .map-quote{position:absolute;bottom:28px;left:16px;z-index:500;max-width:260px;background:rgba(10,22,40,.95);border-left:3px solid var(--guindo);padding:12px 16px;border-radius:0 3px 3px 0;}
-    .map-quote p{font-family:'EB Garamond',serif;font-size:13px;font-style:italic;color:var(--crema-d);line-height:1.55;}
-    .map-quote cite{display:block;font-family:'Oswald',sans-serif;font-size:9px;letter-spacing:1.5px;color:var(--oro);margin-top:7px;opacity:.8;}
+    .map-quote{position:absolute;bottom:28px;left:16px;z-index:500;max-width:290px;background:linear-gradient(145deg, rgba(26,26,26,0.95), rgba(15,15,15,0.98));border-left:3px solid var(--oro);padding:14px 18px;border-radius:0 6px 6px 0;box-shadow: 0 6px 20px rgba(0,0,0,0.6);border: 1px solid rgba(201,168,76,0.1);border-left:3px solid var(--oro);}
+    .map-quote p{font-family:'EB Garamond',serif;font-size:14px;font-style:italic;color:var(--crema-d);line-height:1.6;}
+    .map-quote cite{display:block;font-family:'Oswald',sans-serif;font-size:9.5px;letter-spacing:1.5px;color:var(--oro-cl);margin-top:8px;text-transform: uppercase;opacity:.9;}
 
-    /* PANEL LATERAL */
-    .panel{width:400px;flex-shrink:0;background:linear-gradient(180deg,#1A1A1A,#0F0F0F);border-left:1px solid rgba(201,168,76,.2);display:flex;flex-direction:column;overflow:hidden;position:relative;}
-    .panel::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--guindo),var(--oro),var(--guindo),transparent);}
-    .pinicio{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:36px;text-align:center;}
+    /* PANEL LATERAL - Elegancia Oscura e Institucional */
+    .panel{width:410px;flex-shrink:0;background:linear-gradient(180deg, #1E1E1E 0%, #141414 50%, #0A0A0A 100%);border-left:1px solid rgba(201,168,76,.25);display:flex;flex-direction:column;overflow:hidden;position:relative;box-shadow: -5px 0 25px rgba(0,0,0,0.5);}
+    .panel::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--guindo),var(--oro),var(--guindo),transparent);z-index: 10;}
     
-    /* ADAPTACIÓN ESPECÍFICA PARA DISPOSITIVOS MÓVILES (Media Query) */
+    /* MENÚS INTERNOS / LISTAS / BOTONES (Asegura su estética original) */
+    .pinicio{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px;text-align:center;}
+    
+    /* REGLAS RESPONSIVAS ELEGANTES PARA MÓVILES */
     @media (max-width: 992px) {
-      .hlogos {
-        justify-content:center;
-        padding:12px;
-      }
-      .hc {
-        order: 3; /* Envía el título al centro si los logos se acomodan */
-        width: 100%;
-        margin-top: 8px;
-      }
-      .hst {
-        gap: 15px;
-        padding: 12px;
-      }
-      .std {
-        display: none; /* Quitamos las barras de separación rígidas en móviles */
-      }
+      header { border-bottom: 3px solid var(--guindo); }
+      .hlogos { justify-content: center; padding: 12px; gap: 12px; }
+      .hlogos img.ll { height: 52px; }
+      .hlogos img.lr { height: 58px; }
+      .hc { order: 3; width: 100%; margin-top: 6px; padding: 0; }
+      .hc .tit { font-size: 19px; }
+      .hc .sub { font-size: 13px; }
+      .hst { gap: 20px; padding: 12px; }
+      .std { display: none; }
+      .stn { font-size: 24px; }
+      
       .main {
         display: flex;
-        flex-direction: column; /* Cambia la estructura a vertical */
-        height: auto; /* Permite que el contenido fluya */
+        flex-direction: column;
+        height: auto;
         min-height: auto;
       }
       #map {
         width: 100%;
-        height: 60vh; /* El mapa ocupa el 60% de la altura de la pantalla del celular */
-        min-height: 300px;
+        height: 55vh; /* Proporción ideal para interactuar con el mapa táctil */
+        min-height: 320px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.4);
       }
       .panel {
-        width: 100%; /* El panel ahora toma todo el ancho de la pantalla del celular */
+        width: 100%;
         border-left: none;
-        border-top: 1px solid rgba(201,168,76,.2);
+        border-top: 2px solid rgba(201,168,76,.25);
         height: auto;
-        max-height: 600px; /* Evita listas infinitas, permitiendo scroll interno cómodo */
+        max-height: 550px;
         overflow-y: auto;
+        background: linear-gradient(180deg, #1A1A1A 0%, #0F0F0F 100%);
       }
       .map-quote {
-        bottom: 10px;
-        left: 10px;
-        max-width: calc(100% - 20px); /* Ajuste dinámico de la cita sobre el mapa */
-        font-size: 11px;
-        padding: 8px 12px;
+        bottom: 12px;
+        left: 12px;
+        max-width: calc(100% - 24px);
+        font-size: 12px;
+        padding: 10px 14px;
+        background: rgba(15, 15, 15, 0.96); /* Fondo opaco ultra-limpio para evitar mezcla visual con el mapa trasero */
       }
     }
 
-    /* Ajuste para teléfonos extremadamente pequeños (Gama baja o pantallas menores a 400px) */
+    /* Optimización de menús y textos para celulares muy compactos */
     @media (max-width: 400px) {
-      .stn { font-size: 20px; }
-      .stl { font-size: 8px; }
-      .hlogos img.ll { height: 45px; }
-      .hlogos img.lr { height: 50px; }
+      .stn { font-size: 21px; }
+      .stl { font-size: 8.5px; letter-spacing: 1px; }
+      .hlogos img.ll { height: 44px; }
+      .hlogos img.lr { height: 48px; }
       .hc .tit { font-size: 17px; }
+      .ley { padding: 8px 16px; gap: 10px; }
     }
 </style>
 </head>
