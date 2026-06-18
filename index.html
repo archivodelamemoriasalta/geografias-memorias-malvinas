@@ -287,10 +287,57 @@ header{background:var(--fondo-h);border-bottom:4px solid var(--guindo);}
 
     @keyframes fi{from{opacity:0;transform:translateX(8px)}to{opacity:1;transform:translateX(0)}}
 @media (max-width: 768px) {
-      .hlogos {padding:6px 10px; gap:8px;}
-      .logo-izq img.logo-header {height:40px;}
-      .hc .tit {font-size:15px;}
-      .hc .sub {font-size:11.5px;}
+  .hlogos{
+    padding:4px 6px;
+    gap:6px;
+    align-items:center;
+  }
+
+  .logo-izq,
+  .logo-der{
+    flex:0 0 86px;
+    width:86px;
+  }
+
+  .logo-izq img.logo-header,
+  .logo-der img.logo-header{
+    width:86px;
+    height:auto;
+    display:block;
+  }
+
+  .hc{
+    flex:1 1 auto;
+    min-width:0;
+    padding:0 4px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+  }
+
+  .hc .sup{
+    font-size:7px;
+    letter-spacing:1px;
+    margin-bottom:2px;
+    line-height:1.1;
+  }
+
+  .hc .tit{
+    font-size:13px;
+    line-height:1.05;
+    max-width:100%;
+    word-break:normal;
+    overflow-wrap:break-word;
+  }
+
+  .hc .sub{
+    font-size:9px;
+    margin-top:2px;
+    line-height:1.1;
+  }
+
+}
       .logo-der img.logo-header {height:40px;}
       .lr {display:none;}
 
