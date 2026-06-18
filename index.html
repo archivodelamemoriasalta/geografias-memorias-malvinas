@@ -81,7 +81,7 @@ header{background:var(--fondo-h);border-bottom:4px solid var(--guindo);}
     .li{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--crema-d);}
     .lc{width:12px;height:8px;border-radius:2px;border:1px solid rgba(255,255,255,.12);flex-shrink:0;}
 
-    .main{display:flex;height:calc(100dvh - 140px);min-height:400px;position:relative;overflow:hidden;}
+    .main{padding-bottom:52px;box-sizing:border-box;display:flex;height:calc(100dvh - 140px);min-height:400px;position:relative;overflow:hidden;}
     #map{flex:1;background:var(--azul-n);position:relative;}
     .leaflet-container{background:#08121f !important;}
     .map-tooltip{background:rgba(17,17,17,.95)!important;border:1px solid var(--guindo)!important;color:var(--crema)!important;font-family:'Crimson Pro',serif!important;font-size:13px!important;padding:8px 14px!important;border-radius:3px!important;box-shadow:0 4px 20px rgba(0,0,0,.6)!important;}
@@ -379,6 +379,37 @@ header{background:var(--fondo-h);border-bottom:4px solid var(--guindo);}
       .ley {padding:4px 8px; gap:8px; font-size:11px;}
       .map-quote {max-width:170px; bottom:12px; left:12px; font-size:12px;}
     }
+    /* ==========================================
+   FOOTER FIJO
+========================================== */
+
+.footer-fixed{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    z-index:9999;
+
+    background:#111;
+    color:#d8d8d8;
+
+    text-align:center;
+    font-size:.78rem;
+    line-height:1.35;
+
+    padding:8px 10px;
+
+    border-top:1px solid rgba(255,255,255,.08);
+
+    box-sizing:border-box;
+}
+
+.footer-fixed .dev-data{
+    font-size:.72rem;
+    opacity:.85;
+}
+
+    
 </style>
 </head>
 <script>
@@ -830,5 +861,11 @@ function renderModal(){
 // Tecla ESC cierra modal
 document.addEventListener('keydown',e=>{if(e.key==='Escape') cerrarModal();});
 </script>
+  <div class="footer-fixed">
+    © 2026 Archivo Provincial de la Memoria - Provincia de Salta<br>
+    <span class="dev-data">
+        Desarrollo Web y Cartográfico: Ing. Agrim. Tortosa, Néstor Fernando - ing.tortosanf@gmail.com
+    </span>
+</div>
 </body>
 </html>
