@@ -86,9 +86,51 @@ header{background:var(--fondo-h);border-bottom:4px solid var(--guindo);}
     .leaflet-container{background:#08121f !important;}
     .map-tooltip{background:rgba(17,17,17,.95)!important;border:1px solid var(--guindo)!important;color:var(--crema)!important;font-family:'Crimson Pro',serif!important;font-size:13px!important;padding:8px 14px!important;border-radius:3px!important;box-shadow:0 4px 20px rgba(0,0,0,.6)!important;}
     .map-tooltip strong{display:block;font-family:'EB Garamond',serif;font-size:15px;color:var(--oro-cl);}
-    .map-quote{position:absolute;bottom:28px;left:16px;z-index:500;max-width:260px;background:rgba(10,22,40,.9);border-left:3px solid var(--guindo);padding:12px 16px;border-radius:0 3px 3px 0;backdrop-filter:blur(6px);}
-    .map-quote p{font-family:'EB Garamond',serif;font-size:13px;font-style:italic;color:var(--crema-d);line-height:1.55;}
-    .map-quote cite{display:block;font-family:'Oswald',sans-serif;font-size:9px;letter-spacing:1.5px;color:var(--oro);margin-top:7px;opacity:.8;}
+.map-quote{
+  position:absolute;
+  bottom:28px;
+  left:16px;
+  z-index:500;
+  max-width:420px; /* más ancho para el nuevo texto */
+  background:rgba(10,22,40,.92);
+  border-left:3px solid var(--guindo);
+  padding:14px 18px;
+  border-radius:0 3px 3px 0;
+  backdrop-filter:blur(6px);
+}
+
+.map-quote p{
+  font-family:'EB Garamond',serif;
+  font-size:14px;
+  color:var(--crema-d);
+  line-height:1.6;
+  font-style:normal;
+}
+
+.decreto-link{
+  color:var(--oro-cl);
+  font-weight:700;
+  text-decoration:none;
+}
+
+.decreto-link:hover{
+  text-decoration:underline;
+}
+
+.map-quote cite{
+  display:block;
+  margin-top:12px;
+  font-family:'Oswald',sans-serif;
+  font-size:11px;
+  letter-spacing:1.5px;
+  color:var(--oro);
+  font-style:normal;
+}
+
+.map-quote cite strong{
+  color:var(--oro);
+  font-weight:700;
+}
 
     /* PANEL LATERAL */
     .panel{width:400px;flex-shrink:0;background:linear-gradient(180deg,#1A1A1A,#0F0F0F);border-left:1px solid rgba(201,168,76,.2);display:flex;flex-direction:column;overflow:hidden;position:relative;z-index:100;}
@@ -437,11 +479,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <div class="main">
   <button class="menu-mobile" id="menuMobile">☰</button>
-  <div id="map">
-    <div class="map-quote">
-      <p>"Geografías, memorias y semblanzas de Malvinas. Un límite al olvido."</p>
-      <cite>— Archivo Provincial de la Memoria · Salta</cite>
-    </div>
+<div class="map-quote">
+  <p>
+    Geografías, Memorias y Semblanzas de Malvinas es una iniciativa destinada a preservar la memoria de los veteranos salteños y fortalecer la reparación histórica. A través de la localización geográfica de sus historias.
+    <br><br>
+    Su desarrollo fue posible gracias al trabajo de recopilación y organización de información realizado por la Comisión Provincial de Veteranos de Guerra de Salta.
+    <br><br>
+    La iniciativa fue declarada de interés por la Cámara de Diputados de la Provincia de Salta mediante el
+    <a href="/data/decreto.jpeg" target="_blank" class="decreto-link">
+      Decreto N.º 36 SL
+    </a>.
+  </p>
+
+  <cite>
+    <strong>ARCHIVO PROVINCIAL DE LA MEMORIA - SALTA</strong>
+  </cite>
+</div>
   </div>
 
   <div class="panel">
