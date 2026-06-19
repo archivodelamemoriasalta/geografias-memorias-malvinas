@@ -192,7 +192,7 @@ header{background:var(--fondo-h);border-bottom:4px solid var(--guindo);}
       display:flex;flex-direction:column;overflow:hidden;
       position:relative;animation:slideUp .25s ease;
     }
-    @keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fi{from{opacity:0;transform:translateX(8px)}to{opacity:1;transform:translateX(0)}}
     .modal::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--guindo),var(--oro),var(--guindo),transparent);}
 
     .modal-hdr{
@@ -287,105 +287,96 @@ header{background:var(--fondo-h);border-bottom:4px solid var(--guindo);}
 
     @keyframes fi{from{opacity:0;transform:translateX(8px)}to{opacity:1;transform:translateX(0)}}
 @media (max-width: 768px) {
-  .hlogos{
-    padding:4px 6px;
-    gap:6px;
-    align-items:center;
-  }
+      .hlogos {
+        padding: 4px 6px;
+        gap: 6px;
+        align-items: center;
+      }
+      .logo-izq, .logo-der {
+        flex: 0 0 86px;
+        width: 86px;
+      }
+      .logo-izq img.logo-header, .logo-der img.logo-header {
+        width: 86px;
+        height: auto;
+        display: block;
+      }
+      .hc {
+        flex: 1 1 auto;
+        min-width: 0;
+        padding: 0 4px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      .hc .sup {
+        font-size: 7px;
+        letter-spacing: 1px;
+        margin-bottom: 2px;
+        line-height: 1.1;
+      }
+      .hc .tit {
+        font-size: 13px;
+        line-height: 1.05;
+        max-width: 100%;
+        word-break: normal;
+        overflow-wrap: break-word;
+      }
+      .hc .sub {
+        font-size: 9px;
+        margin-top: 2px;
+        line-height: 1.1;
+      }
+      
+      .logo-der img.logo-header { height: 40px; }
+      .lr { display: none; }
+      .hst { padding: 3px 8px; gap: 8px; min-height: auto; }
+      .stn { font-size: 18px; }
 
-  .logo-izq,
-  .logo-der{
-    flex:0 0 86px;
-    width:86px;
-  }
+      /* CORRECCIÓN 1: Faltaba cerrar esta llave */
+      .main { 
+        height: calc(100vh - 116px);
+      } 
+      
+      .panel {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: auto;
+        width: 100%;
+        height: 50vh;
+        z-index: 2000;
+        transform: translateY(100%); /* Oculto por defecto sólo en móvil */
+        transition: transform .3s cubic-bezier(0.32,0.72,0,1);
+        box-shadow: 0 -8px 35px rgba(0,0,0,.6);
+      }
+      
+      .panel.open { 
+        transform: translateY(0); 
+      }
 
-  .logo-izq img.logo-header,
-  .logo-der img.logo-header{
-    width:86px;
-    height:auto;
-    display:block;
-  }
+      .menu-mobile {
+        position: absolute;
+        top: 12px; right: 12px;
+        z-index: 2500;
+        width: 48px; height: 48px;
+        background: rgba(17,17,17,.95);
+        border: 1px solid rgba(201,168,76,.4);
+        color: white;
+        font-size: 26px;
+        border-radius: 6px;
+        display: flex; /* Vuelve a hacerse visible en móvil */
+        align-items: center;
+        justify-content: center;
+      }
 
-  .hc{
-    flex:1 1 auto;
-    min-width:0;
-    padding:0 4px;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-  }
-
-  .hc .sup{
-    font-size:7px;
-    letter-spacing:1px;
-    margin-bottom:2px;
-    line-height:1.1;
-  }
-
-  .hc .tit{
-    font-size:13px;
-    line-height:1.05;
-    max-width:100%;
-    word-break:normal;
-    overflow-wrap:break-word;
-  }
-
-  .hc .sub{
-    font-size:9px;
-    margin-top:2px;
-    line-height:1.1;
-  }
-
-}
-      .logo-der img.logo-header {height:40px;}
-      .lr {display:none;}
-
-      .hst {padding:3px 8px; gap:8px; min-height:auto;}
-      .stn {font-size:18px;}
-
-.main { 
-    height: calc(100vh - 116px); 
-  }
-  
-  .panel {
-    position:fixed;
-    left:0;
-    right:0;
-    bottom:0;
-    top:auto;
-    width:100%;
-    height:55vh;
-    z-index:2000;
-    transform:translateY(100%);
-    transition:transform .3s cubic-bezier(0.32,0.72,0,1);
-    box-shadow:0 -8px 35px rgba(0,0,0,.6);
-  }
-  
-  .panel.open {
-    transform:translateY(0);
-  }
-
-  .menu-mobile {
-    position:absolute;
-    top:12px; 
-    right:12px;
-    z-index:2500;
-    width:48px; 
-    height:48px;
-    background:rgba(17,17,17,.95);
-    border:1px solid rgba(201,168,76,.4);
-    color:white;
-    font-size:26px;
-    border-radius:6px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-  }
-
-  .ley {padding:4px 8px; gap:8px; font-size:11px;}
-  .map-quote {max-width:170px; bottom:12px; left:12px; font-size:12px;}
-}
+      .ley { padding: 4px 8px; gap: 8px; font-size: 11px; }
+      .map-quote { max-width: 170px; bottom: 12px; left: 12px; font-size: 12px; }
+      
+    } /* CORRECCIÓN 2: Aquí es donde debe cerrar el @media realmente */
+  </style>
 /* Estilos DESKTOP (siempre visibles) */
 @media (min-width: 769px) {
   .panel {
