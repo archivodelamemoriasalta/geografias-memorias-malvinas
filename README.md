@@ -79,3 +79,6 @@ Archivo Provincial de la Memoria – Salta.
 ---
 
 **Año de publicación:** 2026.
+
+
+![](https://komarev.com/ghpvc/?username=archivodelamemoriasalta)
