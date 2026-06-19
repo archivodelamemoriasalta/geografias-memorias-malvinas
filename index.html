@@ -693,19 +693,34 @@ const BM = {'Armada':'bA','Ejército':'bE','Fuerza Aérea':'bF','Otro':'bO'};
 const FM = {'Armada':'fA','Ejército':'fE','Fuerza Aérea':'fF','Otro':'fO'};
 
 function abrirDepto(nom){
-  deptoActual=nom; filtroF='todos';
-  document.querySelectorAll('.pfil .fb').forEach(b=>b.classList.remove('on'));
+  deptoActual = nom; 
+  filtroF = 'todos';
+  
+  // Resetear filtros
+  document.querySelectorAll('.pfil .fb').forEach(b => b.classList.remove('on'));
   document.querySelector('.pfil .fb').classList.add('on');
-  vetersDepto = EN_MAPA.filter(v=>v.depto===nom).sort((a,b)=>a.nombre.localeCompare(b.nombre,'es'));
-  document.getElementById('pdnom').textContent='Dpto. '+nom;
-  const c=vetersDepto.length;
-  document.getElementById('pdcnt').textContent=c?c+' veterano'+(c>1?'s':'')+' registrado'+(c>1?'s':''):'Sin registros';
-  document.getElementById('bi').value='';
+
+  vetersDepto = EN_MAPA.filter(v => v.depto === nom)
+    .sort((a,b) => a.nombre.localeCompare(b.nombre, 'es'));
+
+  document.getElementById('pdnom').textContent = 'Dpto. ' + nom;
+  const c = vetersDepto.length;
+  document.getElementById('pdcnt').textContent = c ? 
+    c + ' veterano' + (c > 1 ? 's' : '') + ' registrado' + (c > 1 ? 's' : '') : 
+    'Sin registros';
+
+  document.getElementById('bi').value = '';
   renderLista(vetersDepto);
-  document.getElementById('pinicio').style.display='none';
+
+  // Mostrar lista (funciona tanto en móvil como escritorio)
+  document.getElementById('pinicio').style.display = 'none';
   document.getElementById('plista').classList.add('on');
   document.getElementById('pficha').classList.remove('on');
-  abrirPanelMobile();
+
+  // Solo en móvil
+  if (window.innerWidth <= 768) {
+    abrirPanelMobile();
+  }
 }
 
 function renderLista(lista){
