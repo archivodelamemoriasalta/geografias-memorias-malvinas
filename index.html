@@ -648,16 +648,27 @@ EN_MAPA.forEach(v => CNT[v.depto] = (CNT[v.depto]||0)+1);
 let map, geoLayer;
 let deptoActual=null, vetersDepto=[], filtroF='todos';
 
+  // ═══════════════════════════════════════════════════════
+//  MAPA
+// ═══════════════════════════════════════════════════════
+let map, geoLayer;
+let deptoActual=null, vetersDepto=[], filtroF='todos';
+
+// Inicializar el mapa con Leaflet
+map = L.map('map').setView([-24.5, -65.4], 8);
+
+// Capa base oscura
 L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
   attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ',
   maxZoom: 16
 }).addTo(map);
 
-// Opcional: capa de etiquetas encima (si querés nombres de lugares)
+// Capa de etiquetas encima (nombres de lugares)
 L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}', {
   attribution: '',
   maxZoom: 16
 }).addTo(map);
+
 
 function color(n){
   if(!n) return '#E6CDD3';
