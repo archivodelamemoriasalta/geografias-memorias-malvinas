@@ -649,7 +649,9 @@ let map, geoLayer;
 let deptoActual=null, vetersDepto=[], filtroF='todos';
 
 map = L.map('map',{zoomControl:true,preferCanvas:true}).setView([-24.5,-64.5],7);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+
+L.tileLayer('https://wms.ign.gob.ar/geoserver/gwc/service/tms/1.0.0/capabaseargenmap@EPSG:3857@png/{z}/{x}/{y}.png', {
+  tms: true,
   attribution: '© OpenStreetMap contributors',
   maxZoom: 19
 }).addTo(map);
