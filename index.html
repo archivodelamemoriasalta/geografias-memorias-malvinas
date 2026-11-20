@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Geografías, Memorias y Semblanzas de Malvinas — Un Límite al Olvido</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,400&family=Oswald:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,400&family=Oswald:wght@300;400;500&family=Playfair+Display:ital,wght@0,700;0,800;1,500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
   <style>
     :root{
@@ -54,9 +54,9 @@ header{background:var(--fondo-h);border-bottom:4px solid var(--guindo);}
     }
     .logo-izq img.logo-header{height:56px;width:auto;flex-shrink:0;}
     .hc{flex:1;text-align:center;min-width:0;padding:0 8px;}
-    .hc .sup{font-family:'Oswald',sans-serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--guindo);margin-bottom:5px;opacity:.8;}
-    .hc .tit{font-family:'EB Garamond',serif;font-size:17px;font-weight:700;color:var(--guindo-osc);line-height:1.1;}
-    .hc .sub{font-family:'EB Garamond',serif;font-size:12.5px;font-style:italic;color:var(--guindo);margin-top:4px;opacity:.85;}
+    .hc .sup{font-family:'Oswald',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--guindo);margin-bottom:5px;opacity:.8;}
+    .hc .tit{font-family:'Playfair Display','EB Garamond',serif;font-size:26px;font-weight:800;color:var(--guindo-osc);line-height:1.12;letter-spacing:.2px;}
+    .hc .sub{font-family:'Playfair Display','EB Garamond',serif;font-size:15px;font-style:italic;font-weight:500;color:var(--guindo);margin-top:4px;}
     .logo-der img.logo-header{height:40px;width:auto;flex-shrink:0;}
     .lr{display:none;} /* Oculto en móvil */
 
@@ -428,9 +428,42 @@ header{background:var(--fondo-h);border-bottom:4px solid var(--guindo);}
     .leaflet-control-layers label{margin:2px 0;}
     @media (max-width:768px){
       .btn-flotante{padding:9px 14px;font-size:11px;bottom:40px;}
-      .logo-izq{flex:0 0 112px;width:112px;}
-      .logo-izq img.logo-header{width:112px;}
+      .hlogos{flex-wrap:wrap;justify-content:space-between;row-gap:2px;}
+      .logo-izq{order:1;flex:0 0 124px;width:124px;}
+      .logo-izq img.logo-header{width:124px;}
+      .logo-der{order:2;}
+      .hc{order:3;flex:1 1 100%;padding:0 4px;}
+      .hc .sup{display:none;}
+      .hc .tit{font-size:18px;line-height:1.12;}
+      .hc .sub{font-size:13px;}
+      .bglobal{font-size:16px;}   /* 16px evita el zoom automático de iOS */
     }
+
+    /* Buscador global */
+    .busqbar{position:relative;z-index:3000;flex-shrink:0;background:#0F0F0F;border-bottom:1px solid rgba(176,138,66,.25);padding:7px 10px;display:flex;justify-content:center;}
+    .bwrap{position:relative;width:min(600px,100%);}
+    .bglobal{width:100%;background:rgba(255,255,255,.08);border:1px solid rgba(176,138,66,.5);border-radius:22px;padding:8px 16px 8px 38px;color:var(--crema);font-family:'Crimson Pro',serif;font-size:15px;outline:none;transition:border-color .2s,background .2s;}
+    .bglobal::placeholder{color:var(--gris);}
+    .bglobal:focus{border-color:var(--oro-cl);background:rgba(255,255,255,.12);}
+    .bico{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--oro-cl);pointer-events:none;}
+    .bres{display:none;position:absolute;top:calc(100% + 5px);left:0;right:0;background:#1A1A1A;border:1px solid rgba(176,138,66,.45);border-radius:6px;max-height:min(55vh,420px);overflow-y:auto;box-shadow:0 12px 32px rgba(0,0,0,.65);}
+    .bres.on{display:block;}
+    .bres-i{padding:9px 16px;cursor:pointer;border-bottom:1px solid rgba(255,255,255,.06);}
+    .bres-i:hover,.bres-i.sel{background:rgba(109,7,26,.45);}
+    .bn{font-family:'EB Garamond',serif;font-size:16px;font-weight:600;color:var(--crema);}
+    .bd{font-size:12.5px;color:var(--gris);margin-top:1px;}
+    .bvac{padding:12px 16px;color:var(--gris);font-style:italic;font-size:14px;}
+    /* Botones Atrás / Cerrar de las ventanas flotantes */
+    .wbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+    .wbtn{background:rgba(109,7,26,.3);border:1px solid rgba(176,138,66,.5);color:var(--crema);font-family:'Oswald',sans-serif;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;padding:0 14px;height:36px;border-radius:4px;cursor:pointer;transition:background .2s;display:inline-flex;align-items:center;gap:6px;}
+    .wbtn:hover{background:var(--guindo);}
+    .wbtn.wx{width:36px;padding:0;justify-content:center;border-radius:50%;font-size:16px;letter-spacing:0;}
+    .modal-hdr{align-items:center;}
+    .modal-hdr-txt{flex:1;min-width:0;}
+    .modal-cerrar{width:36px;height:36px;}
+    .modal-ficha{display:none;flex:1;overflow-y:auto;}
+    .modal.vista-ficha .modal-tabs,.modal.vista-ficha .modal-filtros,.modal.vista-ficha .modal-body{display:none;}
+    .modal.vista-ficha .modal-ficha{display:block;}
 </style>
 </head>
 <script>
@@ -519,6 +552,14 @@ document.addEventListener('DOMContentLoaded', () => {
   </div>
 </header>
 
+<div class="busqbar">
+  <div class="bwrap">
+    <svg class="bico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+    <input id="bglobal" class="bglobal" type="search" autocomplete="off" placeholder="Buscar veterano por apellido o nombre…" aria-label="Buscar veterano" oninput="buscarGlobal()" onfocus="buscarGlobal()" onkeydown="teclasBusqueda(event)">
+    <div class="bres" id="bres"></div>
+  </div>
+</div>
+
 <div class="ley">
   <span class="ltit">Veteranos por departamento (residencia en Salta)</span>
   <div class="litems">
@@ -543,7 +584,7 @@ document.addEventListener('DOMContentLoaded', () => {
     </div>
     <div class="plista" id="plista">
       <div class="phdr">
-        <div class="pbc" onclick="irMapa()">&#8592; Mapa</div>
+        <div class="wbar"><button class="wbtn" onclick="irMapa()">&#8592; Atrás</button><button class="wbtn wx" onclick="irMapa()" aria-label="Cerrar">✕</button></div>
         <div class="pdnom" id="pdnom"></div>
         <div class="pdcnt" id="pdcnt"></div>
       </div>
@@ -560,7 +601,7 @@ document.addEventListener('DOMContentLoaded', () => {
     </div>
     <div class="pficha" id="pficha">
       <div class="fhdr">
-        <div class="pbc" onclick="irLista()">&#8592; Lista del departamento</div>
+        <div class="wbar"><button class="wbtn" onclick="irLista()">&#8592; Atrás</button><button class="wbtn wx" onclick="irMapa()" aria-label="Cerrar">✕</button></div>
         <div class="pdnom" style="font-size:13px;opacity:.6;">Ficha de Veterano</div>
       </div>
       <div class="fcont" id="fcont"></div>
@@ -577,13 +618,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <!-- Modal ventana aparte -->
 <div class="modal-overlay" id="modalOverlay" onclick="cerrarModalSiOverlay(event)">
-  <div class="modal">
+  <div class="modal" id="modalBox">
     <div class="modal-hdr">
+      <button class="wbtn" onclick="atrasModal()">&#8592; Atrás</button>
       <div class="modal-hdr-txt">
         <h2>Veteranos residentes fuera de Salta</h2>
         <p>Nómina de veteranos con residencia en otras provincias o países</p>
       </div>
-      <button class="modal-cerrar" onclick="cerrarModal()">✕</button>
+      <button class="modal-cerrar" onclick="cerrarModal()" aria-label="Cerrar">✕</button>
     </div>
     <div class="modal-tabs">
       <div class="mtab on" id="tab-todos" onclick="switchTab('todos')">
@@ -603,6 +645,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <button class="fb" onclick="setMF('Ejército',this)">Ejército</button>
       <button class="fb" onclick="setMF('Fuerza Aérea',this)">F. Aérea</button>
     </div>
+    <div class="modal-ficha" id="modal-ficha"></div>
     <div class="modal-body" id="modal-body">
       <table class="modal-tabla">
         <thead>
@@ -625,7 +668,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // ═══════════════════════════════════════════════════════
 //  DATOS
 // ═══════════════════════════════════════════════════════
-let EN_MAPA=[], SIN_MAPA=[];   // se cargan desde data/veteranos.json (generado desde datos/veteranos.xlsx)
+let EN_MAPA=[], SIN_MAPA=[], ALL=[];   // se cargan desde data/veteranos.json (generado desde datos/veteranos.xlsx)
 const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 const nz=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
 
@@ -645,6 +688,7 @@ const setTxt=(id,t)=>{const e=document.getElementById(id); if(e) e.textContent=t
 function cargarDatos(){
   return fetch('data/veteranos.json').then(r=>{if(!r.ok)throw 0;return r.json();}).then(d=>{
     d.forEach(v=>{for(const k in v) if(typeof v[k]==='string') v[k]=esc(v[k]);});   // escapar una sola vez
+    d.forEach((v,i)=>{v._k=nz(v.nombre);v._i=i;}); ALL=d;
     EN_MAPA=d.filter(v=>v.enMapa); SIN_MAPA=d.filter(v=>!v.enMapa);
     EN_MAPA.forEach(v=>CNT[v.depto]=(CNT[v.depto]||0)+1);
     const nFall=SIN_MAPA.filter(v=>v.fallecido).length, nFuera=SIN_MAPA.length-nFall;
@@ -664,7 +708,7 @@ function cargarDatos(){
 let map, geoLayer;
 let deptoActual=null, vetersDepto=[], filtroF='todos';
 
-map = L.map('map',{zoomControl:true,preferCanvas:true,zoomSnap:0.25,zoomDelta:0.5}).setView([-24.5,-64.5],7);
+map = L.map('map',{zoomControl:true,preferCanvas:true,zoomSnap:0.25,zoomDelta:0.5,maxZoom:16}).setView([-24.5,-64.5],7);
 window.map = map;   // las funciones del panel móvil usan window.map.invalidateSize()
 window.addEventListener('resize',()=>map.invalidateSize());
 window.addEventListener('load',()=>map.invalidateSize());
@@ -672,20 +716,26 @@ window.addEventListener('load',()=>map.invalidateSize());
 // Mapa base: Argenmap (IGN). Oficial: muestra las Islas Malvinas como argentinas.
 const IGN='https://wms.ign.gob.ar/geoserver/gwc/service/tms/1.0.0/';
 const ATRIB='Cartografía base: © <a href="https://www.ign.gob.ar" target="_blank" rel="noopener">Instituto Geográfico Nacional</a> · Argenmap';
-const mkBase=capa=>L.tileLayer(IGN+capa+'@EPSG:3857@png/{z}/{x}/{y}.png',{tms:true,attribution:ATRIB,maxZoom:19});
-const BASES={'Oscuro':mkBase('argenmap_oscuro'),'Gris':mkBase('mapabase_gris'),'Color':mkBase('capabaseargenmap')};
-BASES['Oscuro'].addTo(map);
+const mkBase=capa=>L.tileLayer(IGN+capa+'@EPSG%3A3857@png/{z}/{x}/{-y}.png',{attribution:ATRIB,maxZoom:16});
+const BASES={'Topográfico':mkBase('mapabase_topo'),'Oscuro':mkBase('argenmap_oscuro'),'Gris':mkBase('mapabase_gris'),'Color':mkBase('capabaseargenmap')};
+BASES['Topográfico'].addTo(map);
 L.control.layers(BASES,null,{position:'topleft',collapsed:true}).addTo(map);
-let errTiles=0;   // plan B: si el mapa oscuro no responde, pasa al de color
-BASES['Oscuro'].on('tileerror',()=>{ if(++errTiles===6 && map.hasLayer(BASES['Oscuro'])){ map.removeLayer(BASES['Oscuro']); BASES['Color'].addTo(map); } });
+let errTiles=0;   // plan B: si el topográfico no responde, pasa al mapa de color
+BASES['Topográfico'].on('tileerror',()=>{ if(++errTiles===6 && map.hasLayer(BASES['Topográfico'])){ map.removeLayer(BASES['Topográfico']); BASES['Color'].addTo(map); } });
 
 
-const RAMP=[[0,'#2A2A2A','Sin registros'],[5,'#6D071A','1–5'],[20,'#9B2438','6–20'],[40,'#C0394F','21–40'],[80,'#E0707F','41–80'],[Infinity,'#D3B06A','+80']];
+const RAMP=[[0,'#C9C9C9','Sin registros'],[5,'#B55468','1–5'],[20,'#8E2338','6–20'],[40,'#6D071A','21–40'],[80,'#5A0716','41–80'],[Infinity,'#3F0310','+80']];
 function color(n){ n=n||0; for(const [m,c] of RAMP) if(n<=m) return c; }
 document.getElementById('leyColores').innerHTML=RAMP.map(([m,c,t])=>`<div class="li"><div class="lc" style="background:${c}"></div>${t}</div>`).join('');
+const LAYERS={};
 function estiloDepto(f){
-  const nom=GEO2D[f.properties.Departamen]||f.properties.Departamen, sel=(nom===deptoActual);
-  return {fillColor:color(CNT[nom]||0),weight:sel?3:1.5,opacity:1,color:sel?'#D3B06A':'rgba(176,138,66,.5)',fillOpacity:sel?.95:.8};
+  const nom=GEO2D[f.properties.Departamen]||f.properties.Departamen, sel=(nom===deptoActual), n=CNT[nom]||0;
+  return {fillColor:color(n),weight:sel?3.5:1.5,opacity:1,color:sel?'#111111':'rgba(176,138,66,.7)',fillOpacity:n?(sel?.95:.82):(sel?.6:.35)};
+}
+function seleccionarDepto(nom,layer){
+  abrirDepto(nom); geoLayer.setStyle(estiloDepto); layer.bringToFront();
+  const mob=window.innerWidth<=768;   // en celular el panel ocupa la mitad inferior
+  map.fitBounds(layer.getBounds(),{paddingTopLeft:[20,20],paddingBottomRight:[20,mob?Math.round(window.innerHeight*0.5)+10:20]});
 }
 
 cargarDatos().then(()=>fetch('data/salta_departamentos.geojson'))
@@ -697,16 +747,15 @@ cargarDatos().then(()=>fetch('data/salta_departamentos.geojson'))
         const raw = feature.properties.Departamen;
         const nom = GEO2D[raw]||raw;
         const cnt = CNT[nom]||0;
+        LAYERS[nom]=layer;
         layer.bindTooltip(
           `<strong>${nom}</strong>${cnt} veterano${cnt!==1?'s':''} registrado${cnt!==1?'s':''}`,
           {className:'map-tooltip',sticky:true,offset:[10,0]}
         );
         layer.on({
-          mouseover:e=>{e.target.setStyle({weight:2.5,color:'#D3B06A',fillOpacity:.92});e.target.bringToFront();},
+          mouseover:e=>{e.target.setStyle({weight:2.5,color:'#111111',fillOpacity:.92});e.target.bringToFront();},
           mouseout: e=>{geoLayer.resetStyle(e.target);},
-          click:    e=>{abrirDepto(nom);geoLayer.setStyle(estiloDepto);e.target.bringToFront();
-            const mob=window.innerWidth<=768;   // en celular el panel ocupa la mitad inferior
-            map.fitBounds(e.target.getBounds(),{paddingTopLeft:[20,20],paddingBottomRight:[20,mob?Math.round(window.innerHeight*0.5)+10:20]});}
+          click:    e=>seleccionarDepto(nom,e.target)
         });
       }
     }).addTo(map);
@@ -783,8 +832,7 @@ function filtrar(){
   renderLista(l);
 }
 
-function verFicha(idx){
-  const v=EN_MAPA[idx]; if(!v) return;
+function fichaHTML(v){
   const p=v.nombre.split(/[\s,]+/).filter(Boolean);
   const ini=(p[0]||'').charAt(0)+(p[1]||'').charAt(0);
   const fc=FM[v.fuerza]||'fO';
@@ -798,16 +846,30 @@ function verFicha(idx){
     <div class="fcampo"><div class="flbl">Fecha nac.</div><div class="fval">${v.fechaNac||'—'}</div></div>
     <div class="fcampo"><div class="flbl">Localidad nac.</div><div class="fval">${v.birthplace||'—'}</div></div>
     <div class="fcampo"><div class="flbl">Residencia</div><div class="fval">${v.residencia||'—'}</div></div>
-    <div class="fcampo"><div class="flbl">Departamento</div><div class="fval">${v.depto}</div></div>
+    <div class="fcampo"><div class="flbl">Departamento</div><div class="fval">${v.depto||'—'}</div></div>
     <div class="fsec" style="margin-top:18px;">Participación en Malvinas</div>
     <div class="fcampo"><div class="flbl">Fuerza</div><div class="fval">${v.fuerza}</div></div>
     <div class="fcampo"><div class="flbl">Unidad / Buque</div><div class="fval">${v.unidad||'—'}</div></div>
     ${v.fallecido&&v.fechaFallec?`<div class="fsec" style="margin-top:18px;">Fallecimiento</div>
     <div class="fcampo"><div class="flbl">Fecha</div><div class="fval dead">${v.fechaFallec}</div></div>`:''}
   </div>`;
-  document.getElementById('fcont').innerHTML=h;
+  return h;
+}
+function verFicha(idx){
+  const v=EN_MAPA[idx]; if(!v) return;
+  document.getElementById('fcont').innerHTML=fichaHTML(v);
   document.getElementById('plista').classList.remove('on');
   document.getElementById('pficha').classList.add('on');
+}
+function verFichaModal(idx){
+  const v=SIN_MAPA[idx]; if(!v) return;
+  document.getElementById('modal-ficha').innerHTML=fichaHTML(v);
+  document.getElementById('modalBox').classList.add('vista-ficha');
+  document.getElementById('modal-ficha').scrollTop=0;
+}
+function atrasModal(){
+  const m=document.getElementById('modalBox');
+  if(m.classList.contains('vista-ficha')) m.classList.remove('vista-ficha'); else cerrarModal();
 }
 
 function irLista(){document.getElementById('pficha').classList.remove('on');document.getElementById('plista').classList.add('on');}
@@ -828,10 +890,11 @@ let modalTab='todos', modalFuerza='todos', modalSort='nro', modalAsc=true;
 // Contar tabs
 
 function abrirModal(){
+  document.getElementById('modalBox').classList.remove('vista-ficha');
   document.getElementById('modalOverlay').classList.add('visible');
   renderModal();
 }
-function cerrarModal(){document.getElementById('modalOverlay').classList.remove('visible');}
+function cerrarModal(){document.getElementById('modalOverlay').classList.remove('visible');document.getElementById('modalBox').classList.remove('vista-ficha');}
 function cerrarModalSiOverlay(e){if(e.target===document.getElementById('modalOverlay')) cerrarModal();}
 
 function switchTab(t){
@@ -891,7 +954,7 @@ function renderModal(){
   tbody.innerHTML=lista.map(v=>{
     const bc=FM2[v.fuerza]||'bsO';
     const esV=v.fallecido&&!v.residencia;
-    return `<tr>
+    return `<tr onclick="verFichaModal(${SIN_MAPA.indexOf(v)})">
       <td>${v.nro}</td>
       <td><span class="td-nombre">${v.nombre}</span>
         ${v.fallecido?'&nbsp;<span class="tag-v">†</span>':''}
@@ -906,7 +969,47 @@ function renderModal(){
 }
 
 // Tecla ESC cierra modal
-document.addEventListener('keydown',e=>{if(e.key==='Escape') cerrarModal();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){cerrarModal();cerrarBusqueda();}});
+
+// ═══════════════════════════════════════════════════════
+//  BUSCADOR GLOBAL (los 710 registros, sin distinguir tildes)
+// ═══════════════════════════════════════════════════════
+let bLista=[], bSel=-1;
+function cerrarBusqueda(){const b=document.getElementById('bres'); b.classList.remove('on'); bSel=-1;}
+function buscarGlobal(){
+  const q=nz(document.getElementById('bglobal').value).trim(), box=document.getElementById('bres'); bSel=-1;
+  if(q.length<2){box.classList.remove('on');box.innerHTML='';bLista=[];return;}
+  const toks=q.split(/\s+/);
+  bLista=ALL.filter(v=>toks.every(t=>v._k.includes(t)))
+            .sort((a,b)=>(b._k.startsWith(toks[0])-a._k.startsWith(toks[0]))||a.nombre.localeCompare(b.nombre,'es'));
+  const tot=bLista.length; bLista=bLista.slice(0,40);
+  box.innerHTML=tot?bLista.map((v,i)=>`<div class="bres-i" onmousedown="event.preventDefault()" onclick="elegirPersona(${i})">
+      <div class="bn">${v.nombre}${v.fallecido?' †':''}</div>
+      <div class="bd">${[v.fuerza,v.unidad].filter(Boolean).join(' · ')} — ${v.enMapa?'Dpto. '+v.depto:(v.residencia||'Fuera de Salta')}</div></div>`).join('')
+      +(tot>40?`<div class="bvac">${tot-40} resultados más: escribí más letras para acotar</div>`:''):'<div class="bvac">Sin resultados</div>';
+  box.classList.add('on');
+}
+function elegirPersona(i){
+  const v=bLista[i]; if(!v) return;
+  cerrarBusqueda(); document.getElementById('bglobal').blur();
+  if(window.innerWidth<=768 && typeof cerrarPanelMobile==='function') cerrarPanelMobile();
+  if(v.enMapa){
+    cerrarModal();
+    const ly=LAYERS[v.depto]; if(ly&&geoLayer) seleccionarDepto(v.depto,ly); else abrirDepto(v.depto);
+    verFicha(EN_MAPA.indexOf(v));
+  } else {
+    abrirModal(); verFichaModal(SIN_MAPA.indexOf(v));
+  }
+}
+function teclasBusqueda(e){
+  const items=[...document.querySelectorAll('#bres .bres-i')];
+  if(e.key==='ArrowDown'||e.key==='ArrowUp'){
+    if(!items.length) return; e.preventDefault();
+    bSel=(bSel+(e.key==='ArrowDown'?1:-1)+items.length)%items.length;
+    items.forEach((el,k)=>el.classList.toggle('sel',k===bSel)); items[bSel].scrollIntoView({block:'nearest'});
+  } else if(e.key==='Enter'){ if(bLista.length) elegirPersona(bSel>=0?bSel:0); }
+}
+document.addEventListener('click',e=>{ if(!e.target.closest('.bwrap')) cerrarBusqueda(); });
 </script>
   <div class="footer-fixed">
     <span class="dev-data">
