@@ -474,6 +474,13 @@ header{background:var(--fondo-h);border-bottom:4px solid var(--guindo);}
     .std{width:1px;height:24px;background:rgba(255,255,255,.25);flex-shrink:0;}
     .lsep{width:1px;height:14px;background:rgba(255,255,255,.2);margin:0 4px;flex-shrink:0;}
 
+    /* Leyenda de fuerzas = filtro */
+    .lf{background:transparent;border:1px solid transparent;border-radius:12px;padding:2px 9px;cursor:pointer;font-family:inherit;color:var(--crema-d);transition:background .2s,border-color .2s,opacity .2s;}
+    .lf:hover{border-color:rgba(176,138,66,.5);}
+    .lf.on{background:var(--guindo);border-color:var(--oro);color:var(--crema);}
+    .litems.hayf .lf:not(.on){opacity:.5;}
+    .lf:focus-visible{outline:2px solid var(--oro-cl);outline-offset:1px;}
+
     /* Foco visible para navegar con teclado */
     .pi:focus-visible,.bres-i:focus-visible,.modal-tabla tbody tr:focus-visible,.mtab:focus-visible,.fb:focus-visible,.wbtn:focus-visible,.btn-flotante:focus-visible{outline:2px solid var(--oro-cl);outline-offset:-2px;}
 </style>
@@ -525,9 +532,9 @@ header{background:var(--fondo-h);border-bottom:4px solid var(--guindo);}
   <div class="litems">
 <span id="leyColores" style="display:contents"></span>
     <div class="lsep"></div>
-    <div class="li"><div class="lc" style="background:#3a7bd5;border-radius:50%;"></div>Armada</div>
-    <div class="li"><div class="lc" style="background:#4a8c5c;border-radius:50%;"></div>Ejército</div>
-    <div class="li"><div class="lc" style="background:#c0392b;border-radius:50%;"></div>Fuerza Aérea</div>
+    <button type="button" class="li lf" data-f="Armada" aria-pressed="false" title="Filtrar por Armada" onclick="setFuerzaGlobal('Armada')"><div class="lc" style="background:#3a7bd5;border-radius:50%;"></div>Armada</button>
+    <button type="button" class="li lf" data-f="Ejército" aria-pressed="false" title="Filtrar por Ejército" onclick="setFuerzaGlobal('Ejército')"><div class="lc" style="background:#4a8c5c;border-radius:50%;"></div>Ejército</button>
+    <button type="button" class="li lf" data-f="Fuerza Aérea" aria-pressed="false" title="Filtrar por Fuerza Aérea" onclick="setFuerzaGlobal('Fuerza Aérea')"><div class="lc" style="background:#c0392b;border-radius:50%;"></div>Fuerza Aérea</button>
   </div>
 </div>
 
@@ -549,10 +556,10 @@ header{background:var(--fondo-h);border-bottom:4px solid var(--guindo);}
         <div class="pdcnt" id="pdcnt"></div>
       </div>
       <div class="pfil">
-        <button class="fb on" onclick="setF('todos',this)">Todos</button>
-        <button class="fb" onclick="setF('Armada',this)">Armada</button>
-        <button class="fb" onclick="setF('Ejército',this)">Ejército</button>
-        <button class="fb" onclick="setF('Fuerza Aérea',this)">Fuerza Aérea</button>
+        <button class="fb on" data-f="todos" onclick="setF('todos',this)">Todos</button>
+        <button class="fb" data-f="Armada" onclick="setF('Armada',this)">Armada</button>
+        <button class="fb" data-f="Ejército" onclick="setF('Ejército',this)">Ejército</button>
+        <button class="fb" data-f="Fuerza Aérea" onclick="setF('Fuerza Aérea',this)">Fuerza Aérea</button>
       </div>
       <div class="pbusq">
         <input type="text" class="bi" id="bi" placeholder="Buscar por apellido…" oninput="filtrar()">
@@ -600,10 +607,10 @@ header{background:var(--fondo-h);border-bottom:4px solid var(--guindo);}
     </div>
     <div class="modal-filtros">
       <input type="text" class="mbi" id="mbi" placeholder="Buscar por nombre…" oninput="filtrarModal()">
-      <button class="fb" style="flex-shrink:0;" onclick="setMF('todos',this)">Todos</button>
-      <button class="fb" onclick="setMF('Armada',this)">Armada</button>
-      <button class="fb" onclick="setMF('Ejército',this)">Ejército</button>
-      <button class="fb" onclick="setMF('Fuerza Aérea',this)">F. Aérea</button>
+      <button class="fb on" data-f="todos" style="flex-shrink:0;" onclick="setMF('todos',this)">Todos</button>
+      <button class="fb" data-f="Armada" onclick="setMF('Armada',this)">Armada</button>
+      <button class="fb" data-f="Ejército" onclick="setMF('Ejército',this)">Ejército</button>
+      <button class="fb" data-f="Fuerza Aérea" onclick="setMF('Fuerza Aérea',this)">F. Aérea</button>
     </div>
     <div class="modal-ficha" id="modal-ficha"></div>
     <div class="modal-body" id="modal-body">
@@ -650,7 +657,7 @@ function cargarDatos(){
     // Los datos se guardan SIN escapar (para buscar y ordenar bien); se escapan con esc() al armar el HTML.
     d.forEach((v,i)=>{v._k=nz(v.nombre);v._i=i;}); ALL=d;
     EN_MAPA=d.filter(v=>v.enMapa); SIN_MAPA=d.filter(v=>!v.enMapa);
-    EN_MAPA.forEach(v=>CNT[v.depto]=(CNT[v.depto]||0)+1);
+    recontar();
     const nFall=SIN_MAPA.filter(v=>v.fallecido).length, nFuera=SIN_MAPA.length-nFall;
     setTxt('st-total',d.length); setTxt('st-fall',d.filter(v=>v.fallecido).length);
     setTxt('st-mapa',EN_MAPA.length); setTxt('st-fuera',SIN_MAPA.length);
@@ -667,6 +674,7 @@ function cargarDatos(){
 // ═══════════════════════════════════════════════════════
 let map, geoLayer;
 let deptoActual=null, vetersDepto=[], filtroF='todos';
+let fuerzaGlobal='todos';   // filtro por fuerza (leyenda, panel y modal comparten el mismo)
 
 map = L.map('map',{zoomControl:true,preferCanvas:true,zoomSnap:0.25,zoomDelta:0.5,maxZoom:16}).setView([-24.5,-64.5],7);
 window.map = map;   // las funciones del panel móvil usan window.map.invalidateSize()
@@ -709,7 +717,8 @@ cargarDatos().then(()=>fetch('data/salta_departamentos.geojson'))
         const cnt = CNT[nom]||0;
         LAYERS[nom]=layer;
         layer.bindTooltip(
-          `<strong>${nom}</strong>${cnt} veterano${cnt!==1?'s':''} registrado${cnt!==1?'s':''}`,
+          () => { const c=CNT[nom]||0;
+            return `<strong>${nom}</strong>${c} veterano${c!==1?'s':''} registrado${c!==1?'s':''}${fuerzaGlobal!=='todos'?' · '+fuerzaGlobal:''}`; },
           {className:'map-tooltip',sticky:true,offset:[10,0]}
         );
         layer.on({
@@ -739,10 +748,8 @@ const FM = {'Armada':'fA','Ejército':'fE','Fuerza Aérea':'fF','Otro':'fO'};
 
 function abrirDepto(nom){
   deptoActual = nom; 
-  filtroF = 'todos';
-  
-  document.querySelectorAll('.pfil .fb').forEach(b => b.classList.remove('on'));
-  document.querySelector('.pfil .fb').classList.add('on');
+  filtroF = fuerzaGlobal;
+  document.querySelectorAll('.pfil .fb').forEach(b => b.classList.toggle('on', b.dataset.f === fuerzaGlobal));
 
   vetersDepto = EN_MAPA.filter(v => v.depto === nom)
     .sort((a,b) => a.nombre.localeCompare(b.nombre, 'es'));
@@ -754,7 +761,7 @@ function abrirDepto(nom){
     'Sin registros';
 
   document.getElementById('bi').value = '';
-  renderLista(vetersDepto);
+  filtrar();
 
   // Mostrar lista
   document.getElementById('pinicio').style.display = 'none';
@@ -783,13 +790,34 @@ function renderLista(lista){
   }).join('');
 }
 
-function setF(f,btn){filtroF=f;document.querySelectorAll('.pfil .fb').forEach(b=>b.classList.remove('on'));btn.classList.add('on');filtrar();}
+function recontar(){
+  for(const k in CNT) delete CNT[k];
+  EN_MAPA.forEach(v=>{ if(fuerzaGlobal==='todos'||v.fuerza===fuerzaGlobal) CNT[v.depto]=(CNT[v.depto]||0)+1; });
+}
+// Aplica una fuerza ('todos' o una de las tres) a mapa, panel, modal y leyenda a la vez.
+function aplicarFuerza(f){
+  fuerzaGlobal=f; filtroF=f; modalFuerza=f;
+  document.querySelectorAll('.lf').forEach(b=>{const on=b.dataset.f===f; b.classList.toggle('on',on); b.setAttribute('aria-pressed',on);});
+  document.querySelector('.litems').classList.toggle('hayf',f!=='todos');
+  document.querySelectorAll('.pfil .fb, .modal-filtros .fb').forEach(b=>b.classList.toggle('on',b.dataset.f===f));
+  recontar();
+  if(geoLayer) geoLayer.setStyle(estiloDepto);
+  if(deptoActual) filtrar();
+  renderModal();
+}
+// Desde la leyenda: tocar la fuerza activa de nuevo quita el filtro.
+function setFuerzaGlobal(f){ aplicarFuerza(fuerzaGlobal===f?'todos':f); }
+function setF(f,btn){ aplicarFuerza(f); }
 function filtrar(){
   const t=nz(document.getElementById('bi').value);
   let l=vetersDepto;
   if(filtroF!=='todos') l=l.filter(v=>v.fuerza===filtroF);
   if(t) l=l.filter(v=>nz(v.nombre).includes(t));
   renderLista(l);
+  const tot=vetersDepto.length;
+  document.getElementById('pdcnt').textContent = l.length===tot
+    ? (tot ? tot+' veterano'+(tot>1?'s':'')+' registrado'+(tot>1?'s':'') : 'Sin registros')
+    : l.length+' de '+tot+' veterano'+(tot>1?'s':'');
 }
 
 function fichaHTML(v){
@@ -865,12 +893,7 @@ function switchTab(t){
   renderModal();
 }
 
-function setMF(f,btn){
-  modalFuerza=f;
-  document.querySelectorAll('.modal-filtros .fb').forEach(b=>b.classList.remove('on'));
-  btn.classList.add('on');
-  renderModal();
-}
+function setMF(f,btn){ aplicarFuerza(f); }
 
 function filtrarModal(){renderModal();}
 
@@ -964,6 +987,7 @@ function buscarGlobal(){
 function elegirPersona(i){
   const v=bLista[i]; if(!v) return;
   cerrarBusqueda(); document.getElementById('bglobal').blur();
+  if(fuerzaGlobal!=='todos' && v.fuerza!==fuerzaGlobal) aplicarFuerza('todos');
   if(window.innerWidth<=768 && typeof cerrarPanelMobile==='function') cerrarPanelMobile();
   if(v.enMapa){
     cerrarModal();
